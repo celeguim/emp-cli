@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/celeguim/emp-cli/internal/exec"
+	"github.com/celeguim/emp-cli/internal/runner"
 	"github.com/spf13/cobra"
 )
 
@@ -13,7 +13,7 @@ var appsetsCmd = &cobra.Command{
 
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		out, err := exec.Run(
+		out, err := runner.Run(
 			"kubectl",
 			"get",
 			"appset",
