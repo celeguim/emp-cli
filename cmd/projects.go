@@ -2,14 +2,11 @@ package cmd
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/celeguim/emp-cli/internal/argocd"
 	"github.com/celeguim/emp-cli/internal/runner"
 	"github.com/spf13/cobra"
 )
-
-var projectsOutput string
 
 var projectsCmd = &cobra.Command{
 	Use:   "projects",
@@ -18,15 +15,10 @@ var projectsCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 
 		client := argocd.New()
-
 		result, err := projectList(client)
+
 		if err != nil {
-
-			if strings.Contains(result.Stderr, "Unauthenticated") {
-				return fmt.Errorf("you are not logged into Argo CD. Run 'argocd login'")
-			}
-
-			return err
+			return argocd.HandleError(result.Stderr, err)
 		}
 
 		fmt.Print(result.Stdout)
@@ -37,8 +29,7 @@ var projectsCmd = &cobra.Command{
 
 func projectList(client *argocd.Client) (*runner.Result, error) {
 
-	switch projectsOutput {
-
+	switch output {
 	case "json":
 		return client.ProjectListJSON()
 
@@ -48,11 +39,12 @@ func projectList(client *argocd.Client) (*runner.Result, error) {
 }
 
 func init() {
-
 	rootCmd.AddCommand(projectsCmd)
+}
 
+func init() {
 	projectsCmd.Flags().StringVarP(
-		&projectsOutput,
+		&output,
 		"output",
 		"o",
 		"table",

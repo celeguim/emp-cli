@@ -2,14 +2,11 @@ package cmd
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/celeguim/emp-cli/internal/argocd"
 	"github.com/celeguim/emp-cli/internal/runner"
 	"github.com/spf13/cobra"
 )
-
-var reposOutput string
 
 var reposCmd = &cobra.Command{
 	Use:   "repos",
@@ -18,15 +15,10 @@ var reposCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 
 		client := argocd.New()
-
 		result, err := repoList(client)
+
 		if err != nil {
-
-			if strings.Contains(result.Stderr, "Unauthenticated") {
-				return fmt.Errorf("you are not logged into Argo CD. Run 'argocd login'")
-			}
-
-			return err
+			return argocd.HandleError(result.Stderr, err)
 		}
 
 		fmt.Print(result.Stdout)
@@ -37,8 +29,7 @@ var reposCmd = &cobra.Command{
 
 func repoList(client *argocd.Client) (*runner.Result, error) {
 
-	switch reposOutput {
-
+	switch output {
 	case "json":
 		return client.RepoListJSON()
 
@@ -48,11 +39,12 @@ func repoList(client *argocd.Client) (*runner.Result, error) {
 }
 
 func init() {
-
 	rootCmd.AddCommand(reposCmd)
+}
 
+func init() {
 	reposCmd.Flags().StringVarP(
-		&reposOutput,
+		&output,
 		"output",
 		"o",
 		"table",

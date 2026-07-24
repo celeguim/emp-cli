@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/celeguim/emp-cli/internal/argocd"
 	"github.com/celeguim/emp-cli/internal/runner"
@@ -38,21 +37,15 @@ func appList(client *argocd.Client) (*runner.Result, error) {
 
 var appsCmd = &cobra.Command{
 	Use:   "apps",
-	Short: "List Argo CD applications",
+	Short: "List Argo CD Applications",
 
 	RunE: func(cmd *cobra.Command, args []string) error {
 
 		client := argocd.New()
-
 		result, err := appList(client)
 
 		if err != nil {
-
-			if strings.Contains(result.Stderr, "Unauthenticated") {
-				return fmt.Errorf("you are not logged into Argo CD. Run 'argocd login'")
-			}
-
-			return err
+			return argocd.HandleError(result.Stderr, err)
 		}
 
 		fmt.Print(result.Stdout)

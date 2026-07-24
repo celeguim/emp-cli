@@ -2,14 +2,11 @@ package cmd
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/celeguim/emp-cli/internal/argocd"
 	"github.com/celeguim/emp-cli/internal/runner"
 	"github.com/spf13/cobra"
 )
-
-var clustersOutput string
 
 var clustersCmd = &cobra.Command{
 	Use:   "clusters",
@@ -18,12 +15,12 @@ var clustersCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 
 		client := argocd.New()
-
 		result, err := clusterList(client)
+
 		if err != nil {
 
-			if strings.Contains(result.Stderr, "Unauthenticated") {
-				return fmt.Errorf("you are not logged into Argo CD. Run 'argocd login'")
+			if err != nil {
+				return argocd.HandleError(result.Stderr, err)
 			}
 
 			return err
@@ -37,8 +34,7 @@ var clustersCmd = &cobra.Command{
 
 func clusterList(client *argocd.Client) (*runner.Result, error) {
 
-	switch clustersOutput {
-
+	switch output {
 	case "json":
 		return client.ClusterListJSON()
 
@@ -48,11 +44,12 @@ func clusterList(client *argocd.Client) (*runner.Result, error) {
 }
 
 func init() {
-
 	rootCmd.AddCommand(clustersCmd)
+}
 
+func init() {
 	clustersCmd.Flags().StringVarP(
-		&clustersOutput,
+		&output,
 		"output",
 		"o",
 		"table",
