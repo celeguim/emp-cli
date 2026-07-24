@@ -5,21 +5,38 @@ import (
 	"os/exec"
 )
 
-func Run(name string, args ...string) (string, error) {
+type Result struct {
+	Stdout string
+	Stderr string
+	Code   int
+}
+
+func Run(name string, args ...string) (*Result, error) {
 
 	cmd := exec.Command(name, args...)
 
-	var out bytes.Buffer
+	var stdout bytes.Buffer
 	var stderr bytes.Buffer
 
-	cmd.Stdout = &out
+	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
 
 	err := cmd.Run()
 
-	if err != nil {
-		return stderr.String(), err
+	result := &Result{
+		Stdout: stdout.String(),
+		Stderr: stderr.String(),
+		Code:   0,
 	}
 
-	return out.String(), nil
+	if err != nil {
+		if exitErr, ok := err.(*exec.ExitError); ok {
+			result.Code = exitErr.ExitCode()
+		} else {
+			result.Code = -1
+		}
+		return result, err
+	}
+
+	return result, nil
 }

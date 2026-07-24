@@ -3,29 +3,22 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/celeguim/emp-cli/internal/runner"
+	"github.com/celeguim/emp-cli/internal/kubectl"
 	"github.com/spf13/cobra"
 )
 
 var appsetsCmd = &cobra.Command{
 	Use:   "appsets",
-	Short: "List Argo CD ApplicationSets",
+	Short: "List ApplicationSets",
 
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		out, err := runner.Run(
-			"kubectl",
-			"get",
-			"appset",
-			"-A",
-		)
-
+		result, err := kubectl.Get("appset", "-A")
 		if err != nil {
-			return err
+			return fmt.Errorf("%s", result.Stderr)
 		}
 
-		fmt.Print(out)
-
+		fmt.Print(result.Stdout)
 		return nil
 	},
 }
