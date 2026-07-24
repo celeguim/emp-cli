@@ -3,7 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/seuusuario/emp/internal/runtime"
+	"github.com/celeguim/emp-cli/internal/runtime"
 )
 
 var catalogRenderCmd = &cobra.Command{
