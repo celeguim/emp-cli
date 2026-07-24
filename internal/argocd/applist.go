@@ -16,3 +16,14 @@ func (c *Client) AppList() (*runner.Result, error) {
 		"list",
 	)
 }
+
+func (c *Client) AppListJSON() (*runner.Result, error) {
+
+	return runner.Run(
+		"argocd",
+		"app",
+		"list",
+		"-o",
+		"json",
+	)
+}
