@@ -9,11 +9,15 @@ import (
 
 var appsetsCmd = &cobra.Command{
 	Use:   "appsets",
-	Short: "List ApplicationSets",
-
+	Short: "List Argo CD ApplicationSets",
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		result, err := kubectl.Get("appset", "-A")
+		client := kubectl.New()
+
+		result, err := client.Get(
+			"appset",
+			"-A",
+		)
 		if err != nil {
 			return fmt.Errorf("%s", result.Stderr)
 		}

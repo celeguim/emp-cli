@@ -3,12 +3,28 @@ package runner
 import (
 	"bytes"
 	"os/exec"
+	"strings"
 )
 
 type Result struct {
 	Stdout string
 	Stderr string
 	Code   int
+}
+
+func Exists(name string) bool {
+	_, err := exec.LookPath(name)
+	return err == nil
+}
+
+func Version(command string, args ...string) (string, error) {
+
+	result, err := Run(command, args...)
+	if err != nil {
+		return "", err
+	}
+
+	return strings.TrimSpace(result.Stdout), nil
 }
 
 func Run(name string, args ...string) (*Result, error) {
