@@ -1,0 +1,13 @@
+apiVersion: emp.io/v1alpha1
+
+runtimeVersion: 1
+
+generatedAt: 2026-07-24T23:15:00Z
+
+rendererVersion: dev
+
+applications: 1
+
+environments: 2
+
+clusters: 1
