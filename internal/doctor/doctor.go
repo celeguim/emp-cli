@@ -10,29 +10,32 @@ type Check struct {
 
 func Run() []Check {
 
-	checks := []Check{
-		checkTool("kubectl"),
-		checkTool("argocd"),
-		checkTool("helm"),
-		checkTool("git"),
+	return []Check{
+		checkTool("kubectl", "version", "--client", "--short"),
+		checkTool("argocd", "version", "--client"),
+		checkTool("helm", "version", "--short"),
+		checkTool("git", "--version"),
 	}
-
-	return checks
 }
 
-func checkTool(name string) Check {
+func checkTool(name string, versionArgs ...string) Check {
 
-	if runner.Exists(name) {
+	if !runner.Exists(name) {
 		return Check{
 			Name:    name,
-			OK:      true,
-			Message: "installed",
+			OK:      false,
+			Message: "not installed",
 		}
+	}
+
+	version, err := runner.Version(name, versionArgs...)
+	if err != nil {
+		version = "installed"
 	}
 
 	return Check{
 		Name:    name,
-		OK:      false,
-		Message: "not installed",
+		OK:      true,
+		Message: version,
 	}
 }
