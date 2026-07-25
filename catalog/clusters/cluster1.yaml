@@ -1,3 +1,4 @@
 ---
 clusterName: cluster1
 environment: env1
+server: local

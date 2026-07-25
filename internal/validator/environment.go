@@ -31,7 +31,7 @@ func (v *Validator) validateEnvironmentNames(
 			report.Add(Error{
 				File:    doc.Path,
 				Name:    doc.Object.EnvName,
-				Field:   "name",
+				Field:   "envName",
 				Message: "is required",
 			})
 			continue
@@ -41,7 +41,7 @@ func (v *Validator) validateEnvironmentNames(
 			report.Add(Error{
 				File:  doc.Path,
 				Name:  doc.Object.EnvName,
-				Field: "name",
+				Field: "envName",
 				Message: fmt.Sprintf(
 					"duplicate environment %q (already declared in %s)",
 					name,

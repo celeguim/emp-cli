@@ -38,7 +38,7 @@ var catalogRenderCmd = &cobra.Command{
 			return err
 		}
 
-		return runtime.New(root).Render(cat)
+		return runtime.New(".").Render(cat)
 
 	},
 }

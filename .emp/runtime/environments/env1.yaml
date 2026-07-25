@@ -1,4 +1,4 @@
 EnvName: env1
-Namespace: ""
-Project: ""
-TargetRevision: ""
+Namespace: app1
+Project: project1
+TargetRevision: target1
