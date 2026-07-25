@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/celeguim/emp-cli/internal/catalog"
+	"github.com/celeguim/emp-cli/internal/resolver"
 	"github.com/celeguim/emp-cli/internal/runtime"
 	"github.com/celeguim/emp-cli/internal/validator"
 )
@@ -30,6 +31,11 @@ var catalogRenderCmd = &cobra.Command{
 		report := validator.New().Validate(cat)
 		if report.HasErrors() {
 			return report
+		}
+
+		cat, err = resolver.New().Resolve(cat)
+		if err != nil {
+			return err
 		}
 
 		return runtime.New(root).Render(cat)
