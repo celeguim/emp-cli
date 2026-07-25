@@ -14,6 +14,8 @@ func (v *Validator) Validate(cat *catalog.Catalog) Report {
 	var report Report
 
 	v.validateApplications(cat, &report)
+	v.validateEnvironments(cat, &report)
+	v.validateClusters(cat, &report)
 
 	return report
 }

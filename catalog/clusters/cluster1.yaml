@@ -1,2 +1,3 @@
 ---
-clusterName: my-cluster-name
+clusterName: cluster1
+environment: env1
