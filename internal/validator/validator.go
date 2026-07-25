@@ -1,5 +1,7 @@
 package validator
 
+import "github.com/celeguim/emp-cli/internal/catalog"
+
 type Validator struct {
 }
 
@@ -7,12 +9,11 @@ func New() *Validator {
 	return &Validator{}
 }
 
-// func (v *Validator) Validate(cat *catalog.Catalog) Report {
-// 	var report Report
+func (v *Validator) Validate(cat *catalog.Catalog) Report {
 
-// 	v.validateApplications(rt, &report)
-// 	v.validateEnvironments(rt, &report)
-// 	v.validateClusters(rt, &report)
+	var report Report
 
-// 	return report
-// }
+	v.validateApplications(cat, &report)
+
+	return report
+}

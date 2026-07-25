@@ -1,9 +1,8 @@
 package validator
 
 type Error struct {
-	Kind    string
-	Name    string
 	File    string
+	Name    string
 	Field   string
 	Message string
 }

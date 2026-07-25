@@ -1,41 +1,69 @@
 package validator
 
-// func (v *Validator) validateApplications(
-// 	rt *runtime.Runtime,
-// 	report *Report,
-// ) {
+import (
+	"fmt"
+	"strings"
 
-// 	seen := map[string]string{}
+	"github.com/celeguim/emp-cli/internal/catalog"
+)
 
-// 	for _, doc := range rt.Applications {
+func (v *Validator) validateApplications(
+	cat *catalog.Catalog,
+	report *Report,
+) {
+	v.validateApplicationNames(cat, report)
+	v.validateApplicationCharts(cat, report)
+}
 
-// 		name := doc.Object.Metadata.Name
+func (v *Validator) validateApplicationCharts(
+	cat *catalog.Catalog,
+	report *Report,
+) {
+	for _, doc := range cat.Applications {
 
-// 		if name == "" {
+		if strings.TrimSpace(doc.Object.Chart) == "" {
+			report.Add(Error{
+				File:    doc.Path,
+				Field:   "chart",
+				Message: "is required",
+			})
+		}
+	}
+}
 
-// 			report.Add(Error{
-// 				File:    doc.Path,
-// 				Field:   "metadata.name",
-// 				Message: "is required",
-// 			})
+func (v *Validator) validateApplicationNames(
+	cat *catalog.Catalog,
+	report *Report,
+) {
 
-// 			continue
-// 		}
+	seen := make(map[string]string)
 
-// 		if previous, ok := seen[name]; ok {
+	for _, doc := range cat.Applications {
 
-// 			report.Add(Error{
-// 				File:  doc.Path,
-// 				Field: "metadata.name",
-// 				Message: fmt.Sprintf(
-// 					"duplicated (already declared in %s)",
-// 					previous,
-// 				),
-// 			})
+		// name := doc.Object.AppName
+		name := strings.TrimSpace(doc.Object.AppName)
 
-// 			continue
-// 		}
+		if name == "" {
+			report.Add(Error{
+				File:    doc.Path,
+				Name:    doc.Object.AppName,
+				Field:   "appName",
+				Message: "is required",
+			})
+			continue
+		}
 
-// 		seen[name] = doc.Path
-// 	}
-// }
+		if previous, ok := seen[name]; ok {
+			report.Add(Error{
+				File:    doc.Path,
+				Name:    doc.Object.AppName,
+				Field:   "appName",
+				Message: fmt.Sprintf("duplicate application %q (already declared in %s)", name, previous),
+			})
+			continue
+		}
+
+		seen[name] = doc.Path
+
+	}
+}

@@ -7,6 +7,7 @@ import (
 
 	"github.com/celeguim/emp-cli/internal/catalog"
 	"github.com/celeguim/emp-cli/internal/runtime"
+	"github.com/celeguim/emp-cli/internal/validator"
 )
 
 var catalogRenderCmd = &cobra.Command{
@@ -20,14 +21,19 @@ var catalogRenderCmd = &cobra.Command{
 		}
 
 		loader := catalog.NewFilesystemLoader(root)
-
 		cat, err := loader.Load()
+
 		if err != nil {
 			return err
 		}
 
-		rt := runtime.New(root)
-		return rt.Render(cat)
+		report := validator.New().Validate(cat)
+		if report.HasErrors() {
+			return report
+		}
+
+		return runtime.New(root).Render(cat)
+
 	},
 }
 
