@@ -1,6 +1,10 @@
 package runtime
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/celeguim/emp-cli/internal/validator"
+)
 
 func (r *Runtime) Render() error {
 	fmt.Println("CreateWorkspace")
@@ -11,6 +15,13 @@ func (r *Runtime) Render() error {
 	fmt.Println("LoadCatalogs")
 	if err := r.LoadCatalogs(); err != nil {
 		return err
+	}
+
+	report := validator.New().Validate(r)
+
+	if report.HasErrors() {
+		// por enquanto só imprime
+		// depois melhoramos a formatação
 	}
 
 	fmt.Printf("Apps=%d Envs=%d Clusters=%d\n",
