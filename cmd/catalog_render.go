@@ -1,6 +1,9 @@
 package cmd
 
 import (
+	"fmt"
+	"path/filepath"
+
 	"github.com/spf13/cobra"
 
 	"github.com/celeguim/emp-cli/internal/runtime"
@@ -15,5 +18,7 @@ var catalogRenderCmd = &cobra.Command{
 }
 
 func init() {
+	abs_path, _ := filepath.Abs(".")
+	fmt.Printf("catalog_render: abs_path: %s\n", abs_path)
 	catalogCmd.AddCommand(catalogRenderCmd)
 }
