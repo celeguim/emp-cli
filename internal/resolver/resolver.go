@@ -9,5 +9,9 @@ func New() *Resolver {
 }
 
 func (r *Resolver) Resolve(cat *catalog.Catalog) (*catalog.Catalog, error) {
+	if err := r.resolveClusters(cat); err != nil {
+		return nil, err
+	}
+
 	return cat, nil
 }
