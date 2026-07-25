@@ -1,3 +1,2 @@
-root:
-  teste: x
-  
+---
+appName: my-app-name

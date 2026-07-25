@@ -1,19 +1,29 @@
 package runtime
 
-func Render(root string) error {
-	rt := New(root)
+import "fmt"
 
-	if err := rt.CreateWorkspace(); err != nil {
+func (r *Runtime) Render() error {
+	fmt.Println("CreateWorkspace")
+	if err := r.CreateWorkspace(); err != nil {
 		return err
 	}
 
-	if err := rt.LoadCatalogs(); err != nil {
+	fmt.Println("LoadCatalogs")
+	if err := r.LoadCatalogs(); err != nil {
 		return err
 	}
 
-	if err := rt.Write(); err != nil {
+	fmt.Printf("Apps=%d Envs=%d Clusters=%d\n",
+		len(r.Applications),
+		len(r.Environments),
+		len(r.Clusters),
+	)
+
+	fmt.Println("Write")
+	if err := r.Write(); err != nil {
 		return err
 	}
 
-	return rt.WriteManifest()
+	fmt.Println("WriteManifest")
+	return r.WriteManifest()
 }

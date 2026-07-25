@@ -69,10 +69,22 @@ func (r *Runtime) LoadCatalogs() error {
 	return nil
 }
 
-func (r *Runtime) Write() error {
+func (r *Runtime) WriteManifest() error {
 	return nil
 }
 
-func (r *Runtime) WriteManifest() error {
-	return nil
+func (r *Runtime) RuntimeDir() string {
+	return filepath.Join(r.Root, ".emp", "runtime")
+}
+
+func (r *Runtime) ApplicationsDir() string {
+	return filepath.Join(r.RuntimeDir(), "applications")
+}
+
+func (r *Runtime) EnvironmentsDir() string {
+	return filepath.Join(r.RuntimeDir(), "environments")
+}
+
+func (r *Runtime) ClustersDir() string {
+	return filepath.Join(r.RuntimeDir(), "clusters")
 }

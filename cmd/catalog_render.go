@@ -13,7 +13,8 @@ var catalogRenderCmd = &cobra.Command{
 	Use:   "render",
 	Short: "Render runtime artifacts",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return runtime.Render(".")
+		rt := runtime.New(".")
+		return rt.Render()
 	},
 }
 

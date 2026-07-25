@@ -1,7 +1,7 @@
 package catalog
 
 type Environment struct {
-	Name string `yaml:"name"`
+	EnvName string `yaml:"name"`
 
 	Project string `yaml:"project"`
 
