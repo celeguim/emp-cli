@@ -1,25 +1,20 @@
 package runtime
 
-import "fmt"
+import (
+	"github.com/celeguim/emp-cli/internal/catalog"
+)
 
-func (r *Runtime) Write() error {
+func (r *Runtime) Write(cat *catalog.Catalog) error {
 
-	fmt.Printf(
-		"apps=%d envs=%d clusters=%d\n",
-		len(r.Applications),
-		len(r.Environments),
-		len(r.Clusters),
-	)
-
-	if err := r.RenderApplications(); err != nil {
+	if err := r.RenderApplications(cat.Applications); err != nil {
 		return err
 	}
 
-	if err := r.RenderEnvironments(); err != nil {
+	if err := r.RenderEnvironments(cat.Environments); err != nil {
 		return err
 	}
 
-	if err := r.RenderClusters(); err != nil {
+	if err := r.RenderClusters(cat.Clusters); err != nil {
 		return err
 	}
 

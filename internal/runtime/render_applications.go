@@ -3,11 +3,15 @@ package runtime
 import (
 	"fmt"
 	"path/filepath"
+
+	"github.com/celeguim/emp-cli/internal/catalog"
 )
 
-func (r *Runtime) RenderApplications() error {
+func (r *Runtime) RenderApplications(
+	apps []catalog.Document[catalog.Application],
+) error {
 
-	for _, doc := range r.Applications {
+	for _, doc := range apps {
 
 		name := doc.Object.AppName
 

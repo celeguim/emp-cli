@@ -1,47 +1,41 @@
 package validator
 
-import (
-	"fmt"
+// func (v *Validator) validateApplications(
+// 	rt *runtime.Runtime,
+// 	report *Report,
+// ) {
 
-	"github.com/celeguim/emp-cli/internal/runtime"
-)
+// 	seen := map[string]string{}
 
-func (v *Validator) validateApplications(
-	rt *runtime.Runtime,
-	report *Report,
-) {
+// 	for _, doc := range rt.Applications {
 
-	seen := map[string]string{}
+// 		name := doc.Object.Metadata.Name
 
-	for _, doc := range rt.Applications {
+// 		if name == "" {
 
-		name := doc.Object.Metadata.Name
+// 			report.Add(Error{
+// 				File:    doc.Path,
+// 				Field:   "metadata.name",
+// 				Message: "is required",
+// 			})
 
-		if name == "" {
+// 			continue
+// 		}
 
-			report.Add(Error{
-				File:    doc.Path,
-				Field:   "metadata.name",
-				Message: "is required",
-			})
+// 		if previous, ok := seen[name]; ok {
 
-			continue
-		}
+// 			report.Add(Error{
+// 				File:  doc.Path,
+// 				Field: "metadata.name",
+// 				Message: fmt.Sprintf(
+// 					"duplicated (already declared in %s)",
+// 					previous,
+// 				),
+// 			})
 
-		if previous, ok := seen[name]; ok {
+// 			continue
+// 		}
 
-			report.Add(Error{
-				File:  doc.Path,
-				Field: "metadata.name",
-				Message: fmt.Sprintf(
-					"duplicated (already declared in %s)",
-					previous,
-				),
-			})
-
-			continue
-		}
-
-		seen[name] = doc.Path
-	}
-}
+// 		seen[name] = doc.Path
+// 	}
+// }

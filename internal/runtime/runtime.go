@@ -1,19 +1,12 @@
 package runtime
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
-
-	"github.com/celeguim/emp-cli/internal/catalog"
 )
 
 type Runtime struct {
 	Root string
-
-	Applications []catalog.Document[catalog.Application]
-	Environments []catalog.Document[catalog.Environment]
-	Clusters     []catalog.Document[catalog.Cluster]
 }
 
 func New(root string) *Runtime {
@@ -35,36 +28,6 @@ func (r *Runtime) CreateWorkspace() error {
 			return err
 		}
 	}
-
-	return nil
-}
-
-func (r *Runtime) LoadCatalogs() error {
-	loader := catalog.NewFilesystemLoader(r.Root)
-
-	var err error
-
-	r.Applications, err = loader.LoadApplications()
-	if err != nil {
-		return err
-	}
-
-	r.Environments, err = loader.LoadEnvironments()
-	if err != nil {
-		return err
-	}
-
-	r.Clusters, err = loader.LoadClusters()
-	if err != nil {
-		return err
-	}
-
-	fmt.Printf(
-		"\nLoaded %d applications, %d environments, %d clusters\n",
-		len(r.Applications),
-		len(r.Environments),
-		len(r.Clusters),
-	)
 
 	return nil
 }
