@@ -6,8 +6,8 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/celeguim/emp-cli/internal/catalog"
+	"github.com/celeguim/emp-cli/internal/compiler"
 	"github.com/celeguim/emp-cli/internal/resolver"
-	"github.com/celeguim/emp-cli/internal/runtime"
 	"github.com/celeguim/emp-cli/internal/validator"
 )
 
@@ -38,7 +38,7 @@ var catalogRenderCmd = &cobra.Command{
 			return err
 		}
 
-		return runtime.New(".").Render(cat)
+		return compiler.New(".").Render(cat)
 
 	},
 }
