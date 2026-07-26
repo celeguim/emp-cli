@@ -9,68 +9,73 @@ import (
 	"github.com/celeguim/emp-cli/internal/compiler/renderers"
 )
 
+// Compiler transforms a validated catalog into GitOps artifacts.
 type Compiler struct {
-	ctx       *contracts.Context
+	context   *contracts.Context
 	renderers []contracts.Renderer
 }
 
-func New(root string) *Compiler {
-
-	ctx := &contracts.Context{
-		Root: root,
-	}
-
-	return &Compiler{
-		ctx: ctx,
-		renderers: []contracts.Renderer{
-			renderers.NewApplicationRenderer(),
-			renderers.NewEnvironmentRenderer(),
-			renderers.NewClusterRenderer(),
-		},
+func defaultRenderers() []contracts.Renderer {
+	return []contracts.Renderer{
+		renderers.NewApplication(),
+		renderers.NewEnvironment(),
+		renderers.NewCluster(),
 	}
 }
+
+//	func NewCompiler(root string) *Compiler {
+//		return &Compiler{
+//			context:   &contracts.Context{},
+//			renderers: defaultRenderers(),
+//		}
+//	}
+func NewCompiler(root string) *Compiler {
+	return &Compiler{
+		context: &contracts.Context{
+			Root: filepath.Join(root, ".emp"),
+		},
+		renderers: defaultRenderers(),
+	}
+}
+
+// func (c *Compiler) Compile(cat *catalog.Catalog) error {
+// 	fmt.Println("Compile()")
+
+// 	for _, r := range c.renderers {
+// 		fmt.Printf("%T\n", r)
+
+// 		if err := r.Render(c.context, cat); err != nil {
+// 			return err
+// 		}
+// 	}
+
+// 	return nil
+// }
+
+// func (c *Compiler) Compile(cat *catalog.Catalog) error {
+// 	if err := c.workspace.Create(); err != nil {
+// 		return err
+// 	}
+
+// 	for _, r := range c.renderers {
+// 		if err := r.Render(c.context, cat); err != nil {
+// 			return err
+// 		}
+// 	}
+
+// 	return nil
+// }
 
 func (c *Compiler) Compile(cat *catalog.Catalog) error {
+	if err := os.MkdirAll(c.context.Root, 0755); err != nil {
+		return err
+	}
 
 	for _, r := range c.renderers {
-
-		if err := r.Render(c.ctx, cat); err != nil {
+		if err := r.Render(c.context, cat); err != nil {
 			return err
 		}
 	}
 
 	return nil
-}
-
-func (r *Compiler) CreateWorkspace() error {
-	dirs := []string{
-		filepath.Join(r.Root, ".emp", "Compiler"),
-		filepath.Join(r.Root, ".emp", "Compiler", "applications"),
-		filepath.Join(r.Root, ".emp", "Compiler", "environments"),
-		filepath.Join(r.Root, ".emp", "Compiler", "clusters"),
-	}
-
-	for _, dir := range dirs {
-		if err := os.MkdirAll(dir, 0755); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (r *Compiler) CompilerDir() string {
-	return filepath.Join(r.Root, ".emp", "Compiler")
-}
-
-func (r *Compiler) ApplicationsDir() string {
-	return filepath.Join(r.CompilerDir(), "applications")
-}
-
-func (r *Compiler) EnvironmentsDir() string {
-	return filepath.Join(r.CompilerDir(), "environments")
-}
-
-func (r *Compiler) ClustersDir() string {
-	return filepath.Join(r.CompilerDir(), "clusters")
 }

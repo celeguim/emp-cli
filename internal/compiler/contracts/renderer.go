@@ -25,6 +25,6 @@ type Renderer interface {
 	Render(ctx *Context, cat *catalog.Catalog) error
 }
 
-func (r *Compiler) WriteManifest() error {
-	return nil
-}
+// func (r *Compiler) WriteManifest() error {
+// 	return nil
+// }

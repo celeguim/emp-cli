@@ -5,6 +5,6 @@ package contracts
 //	}
 
 type Context struct {
-	Workspace *Workspace
-	Writer    Writer
+	Root   string
+	Writer Writer
 }

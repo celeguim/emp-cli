@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"path/filepath"
 
 	"github.com/spf13/cobra"
@@ -12,9 +13,12 @@ import (
 )
 
 var catalogRenderCmd = &cobra.Command{
+
 	Use:   "render",
 	Short: "Render runtime artifacts",
 	RunE: func(cmd *cobra.Command, args []string) error {
+
+		fmt.Println("catalog render")
 
 		root, err := filepath.Abs(".")
 		if err != nil {
@@ -38,7 +42,7 @@ var catalogRenderCmd = &cobra.Command{
 			return err
 		}
 
-		return compiler.New(".").Render(cat)
+		return compiler.NewCompiler(".").Compile(cat)
 
 	},
 }

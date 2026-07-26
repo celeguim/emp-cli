@@ -1,10 +1,5 @@
 package catalog
 
-import (
-	"fmt"
-	"path/filepath"
-)
-
 type FilesystemLoader struct {
 	Root string
 }
@@ -15,32 +10,26 @@ func NewFilesystemLoader(root string) *FilesystemLoader {
 	}
 }
 
-func (l *FilesystemLoader) applicationsDir() string {
-	thepath := filepath.Join(l.Root, "catalog", "applications")
+// func (l *FilesystemLoader) LoadApplications() ([]Document[Application], error) {
+// 	return loadYAMLFiles[Application](l.applicationsDir())
+// }
 
-	fmt.Printf(
-		"l.root: %s , thepath: %s\n",
-		l.Root, thepath)
+// func (l *FilesystemLoader) LoadEnvironments() ([]Document[Environment], error) {
+// 	return loadYAMLFiles[Environment](l.environmentsDir())
+// }
 
-	return thepath
-}
+// func (l *FilesystemLoader) LoadClusters() ([]Document[Cluster], error) {
+// 	return loadYAMLFiles[Cluster](l.clustersDir())
+// }
 
-func (l *FilesystemLoader) environmentsDir() string {
-	return filepath.Join(l.Root, "catalog", "environments")
-}
-
-func (l *FilesystemLoader) clustersDir() string {
-	return filepath.Join(l.Root, "catalog", "clusters")
-}
-
-func (l *FilesystemLoader) LoadApplications() ([]Document[Application], error) {
+func (l *FilesystemLoader) loadApplications() ([]Document[Application], error) {
 	return loadYAMLFiles[Application](l.applicationsDir())
 }
 
-func (l *FilesystemLoader) LoadEnvironments() ([]Document[Environment], error) {
-	return loadYAMLFiles[Environment](l.environmentsDir())
-}
+// func (l *FilesystemLoader) loadEnvironments() ([]Document[Environment], error) {
+// 	return nil, nil
+// }
 
-func (l *FilesystemLoader) LoadClusters() ([]Document[Cluster], error) {
-	return loadYAMLFiles[Cluster](l.clustersDir())
-}
+// func (l *FilesystemLoader) loadClusters() ([]Document[Cluster], error) {
+// 	return nil, nil
+// }
