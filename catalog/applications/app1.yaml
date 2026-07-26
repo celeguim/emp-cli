@@ -1,3 +1,8 @@
 ---
-appName: app1
-chart: chart/microservice
+name: app1
+project: project1
+chart: nginx
+
+source:
+  repoURL: https://github.com/celeguim/gitops.git
+  path: charts/nginx

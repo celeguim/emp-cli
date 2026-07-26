@@ -20,16 +20,6 @@ func (l *FilesystemLoader) Load() (*Catalog, error) {
 		return nil, err
 	}
 
-	// c.Environments, err = l.loadEnvironments()
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// c.Clusters, err = l.loadClusters()
-	// if err != nil {
-	// 	return nil, err
-	// }
-
 	fmt.Println("Apps:", len(c.Applications))
 	fmt.Println("Envs:", len(c.Environments))
 	fmt.Println("Clusters:", len(c.Clusters))

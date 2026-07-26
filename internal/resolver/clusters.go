@@ -10,7 +10,7 @@ func (r *Resolver) resolveClusters(cat *catalog.Catalog) error {
 	envs := make(map[string]struct{})
 
 	for _, env := range cat.Environments {
-		envs[env.Object.EnvName] = struct{}{}
+		envs[env.Object.Name] = struct{}{}
 	}
 
 	for _, cluster := range cat.Clusters {

@@ -41,12 +41,12 @@ func (v *Validator) validateApplicationNames(
 	for _, doc := range cat.Applications {
 
 		// name := doc.Object.AppName
-		name := strings.TrimSpace(doc.Object.AppName)
+		name := strings.TrimSpace(doc.Object.Name)
 
 		if name == "" {
 			report.Add(Error{
 				File:    doc.Path,
-				Name:    doc.Object.AppName,
+				Name:    doc.Object.Name,
 				Field:   "appName",
 				Message: "is required",
 			})
@@ -56,7 +56,7 @@ func (v *Validator) validateApplicationNames(
 		if previous, ok := seen[name]; ok {
 			report.Add(Error{
 				File:    doc.Path,
-				Name:    doc.Object.AppName,
+				Name:    doc.Object.Name,
 				Field:   "appName",
 				Message: fmt.Sprintf("duplicate application %q (already declared in %s)", name, previous),
 			})

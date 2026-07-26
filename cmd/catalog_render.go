@@ -9,7 +9,6 @@ import (
 	"github.com/celeguim/emp-cli/internal/catalog"
 	"github.com/celeguim/emp-cli/internal/compiler"
 	"github.com/celeguim/emp-cli/internal/resolver"
-	"github.com/celeguim/emp-cli/internal/validator"
 )
 
 var catalogRenderCmd = &cobra.Command{
@@ -32,17 +31,14 @@ var catalogRenderCmd = &cobra.Command{
 			return err
 		}
 
-		report := validator.New().Validate(cat)
-		if report.HasErrors() {
-			return report
-		}
-
-		cat, err = resolver.New().Resolve(cat)
+		resolvedCatalog, err := resolver.Resolve(cat)
 		if err != nil {
 			return err
 		}
 
-		return compiler.NewCompiler(".").Compile(cat)
+		c := compiler.NewCompiler(root)
+
+		return c.Compile(resolvedCatalog)
 
 	},
 }
