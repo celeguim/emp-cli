@@ -45,7 +45,7 @@ func (r *Application) Render(ctx *contracts.Context, cat *resolved.Catalog) erro
 				},
 				Destination: argocd.Destination{
 					Server:    app.Cluster.Server,
-					Namespace: "...",
+					Namespace: app.Environment.Namespace,
 				},
 			},
 		}

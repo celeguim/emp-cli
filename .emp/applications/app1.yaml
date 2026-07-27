@@ -3,11 +3,11 @@ kind: Application
 metadata:
   name: app1
 spec:
-  project: ""
+  project: project1
   source:
     repoURL: https://github.com/celeguim/gitops.git
     path: charts/nginx
-    targetRevision: ""
+    targetRevision: target1
   destination:
-    server: '...'
-    namespace: '...'
+    server: local.k8s.svc
+    namespace: app1

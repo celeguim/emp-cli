@@ -1,7 +1,6 @@
 package catalog
 
 import (
-	"fmt"
 	"path/filepath"
 )
 
@@ -15,9 +14,9 @@ func (l *FilesystemLoader) applicationsDir() string {
 
 	thepath := filepath.Join(l.Root, "catalog", "applications")
 
-	fmt.Printf(
-		"l.root: %s , thepath: %s\n",
-		l.Root, thepath)
+	// fmt.Printf(
+	// 	"l.root: %s , thepath: %s\n",
+	// 	l.Root, thepath)
 
 	return thepath
 

@@ -5,7 +5,6 @@ import (
 	"os"
 	"path/filepath"
 
-	// "gopkg.in/yaml.v3"
 	"sigs.k8s.io/yaml"
 )
 
@@ -21,7 +20,7 @@ func loadYAMLFiles[T any](dir string) ([]Document[T], error) {
 	documents := make([]Document[T], 0, len(files))
 
 	for _, file := range files {
-		fmt.Printf("file: %s", file)
+		// fmt.Printf("file: %s", file)
 
 		data, err := os.ReadFile(file)
 		if err != nil {

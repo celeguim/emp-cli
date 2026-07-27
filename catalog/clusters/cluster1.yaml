@@ -1,4 +1,4 @@
 ---
 clusterName: cluster1
 environment: env1
-server: local
+server: local.k8s.svc

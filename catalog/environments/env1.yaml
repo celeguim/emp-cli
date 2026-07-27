@@ -1,5 +1,5 @@
 ---
-envName: env1
+name: env1
 namespace: app1
 project: project1
 targetRevision: target1
