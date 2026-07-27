@@ -1,7 +1,8 @@
 package argocd
 
 type Metadata struct {
-	Name string `yaml:"name"`
+	Name      string `yaml:"name"`
+	Namespace string `yaml:"namespace"`
 }
 
 type ApplicationSpec struct {

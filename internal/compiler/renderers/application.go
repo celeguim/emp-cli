@@ -34,7 +34,8 @@ func (r *Application) Render(ctx *contracts.Context, cat *resolved.Catalog) erro
 			APIVersion: "argoproj.io/v1alpha1",
 			Kind:       "Application",
 			Metadata: argocd.Metadata{
-				Name: app.Application.Name,
+				Name:      app.Application.Name,
+				Namespace: "argocd",
 			},
 			Spec: argocd.ApplicationSpec{
 				Project: app.Environment.Project,

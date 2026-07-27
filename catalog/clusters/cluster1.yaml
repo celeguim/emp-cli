@@ -1,4 +1,4 @@
 ---
-clusterName: cluster1
-environment: env1
-server: local.k8s.svc
+clusterName: minikube
+environment: uat
+server: https://kubernetes.default.svc

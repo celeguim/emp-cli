@@ -1,5 +1,5 @@
 ---
-name: env1
-namespace: app1
-project: project1
-targetRevision: target1
+name: uat
+namespace: default
+project: default
+targetRevision: HEAD
