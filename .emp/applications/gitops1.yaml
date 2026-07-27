@@ -1,13 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app1
+  name: gitops1
+  namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/celeguim/gitops.git
-    path: charts/nginx
-    targetRevision: target1
+    path: charts/microservice
+    targetRevision: HEAD
   destination:
-    server: local.k8s.svc
+    server: https://kubernetes.default.svc
     namespace: default

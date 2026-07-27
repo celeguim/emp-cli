@@ -1,5 +1,5 @@
 ---
-name: gitops1
+name: gitops2
 project: default
 chart: microservice
 
