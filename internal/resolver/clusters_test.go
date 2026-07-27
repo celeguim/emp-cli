@@ -12,7 +12,7 @@ func TestResolveClusterEnvironment(t *testing.T) {
 			{
 				Path: "environments/dev.yaml",
 				Object: catalog.Environment{
-					EnvName: "dev",
+					Name: "dev",
 				},
 			},
 		},
