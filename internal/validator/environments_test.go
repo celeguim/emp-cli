@@ -1,6 +1,8 @@
 package validator
 
 import (
+	"fmt"
+	"path/filepath"
 	"testing"
 
 	"github.com/celeguim/emp-cli/internal/catalog"
@@ -33,13 +35,22 @@ func TestValidEnvironment(t *testing.T) {
 }
 
 func TestMissingEnvironmentName(t *testing.T) {
-	cat := &catalog.Catalog{
-		Environments: []catalog.Document[catalog.Environment]{
-			env("env/dev.yaml", "", "payments", "main", "payments"),
-		},
+	fmt.Println(filepath.Abs("."))
+
+	loader := catalog.NewFilesystemLoader("../..")
+	cat, err := loader.Load()
+	if err != nil {
+		t.Fatalf("failed to load catalog: %v", err)
 	}
 
+	// cat := &catalog.Catalog{
+	// 	Environments: []catalog.Document[catalog.Environment]{
+	// 		env("env/dev.yaml", "", "payments", "main", "payments"),
+	// 	},
+	// }
+
 	report := New().Validate(cat)
+	fmt.Println("REPORT ", report)
 
 	if !report.HasErrors() {
 		t.Fatal("expected validation error")

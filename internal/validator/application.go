@@ -20,7 +20,6 @@ func (v *Validator) validateApplicationCharts(
 	report *Report,
 ) {
 	for _, doc := range cat.Applications {
-
 		if strings.TrimSpace(doc.Object.Chart) == "" {
 			report.Add(Error{
 				File:    doc.Path,
@@ -42,7 +41,6 @@ func (v *Validator) validateApplicationNames(
 
 		// name := doc.Object.AppName
 		name := strings.TrimSpace(doc.Object.Name)
-
 		if name == "" {
 			report.Add(Error{
 				File:    doc.Path,

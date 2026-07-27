@@ -10,7 +10,9 @@
             "request": "launch",
             "mode": "auto",
             "program": "${fileDirname}",
-            "args": ["--check-go-version","false"],
-        }
+            "dlvFlags": ["--check-go-version=false"],
+        },
+
+
     ]
 }

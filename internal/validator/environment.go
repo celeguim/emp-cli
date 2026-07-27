@@ -11,6 +11,8 @@ func (v *Validator) validateEnvironments(
 	cat *catalog.Catalog,
 	report *Report,
 ) {
+	println("Validating environments...")
+
 	v.validateEnvironmentNames(cat, report)
 	v.validateEnvironmentProjects(cat, report)
 	v.validateEnvironmentTargetRevisions(cat, report)
@@ -24,14 +26,15 @@ func (v *Validator) validateEnvironmentNames(
 	seen := make(map[string]string)
 
 	for _, doc := range cat.Environments {
-
 		name := strings.TrimSpace(doc.Object.Name)
+
+		println("Validating environment name:", name, "from file:", doc.Path)
 
 		if name == "" {
 			report.Add(Error{
 				File:    doc.Path,
 				Name:    doc.Object.Name,
-				Field:   "envName",
+				Field:   "name",
 				Message: "is required",
 			})
 			continue
@@ -41,7 +44,7 @@ func (v *Validator) validateEnvironmentNames(
 			report.Add(Error{
 				File:  doc.Path,
 				Name:  doc.Object.Name,
-				Field: "envName",
+				Field: "name",
 				Message: fmt.Sprintf(
 					"duplicate environment %q (already declared in %s)",
 					name,
