@@ -44,7 +44,7 @@ func (r *Application) Render(ctx *contracts.Context, cat *resolved.Catalog) erro
 					TargetRevision: app.Environment.TargetRevision,
 				},
 				Destination: argocd.Destination{
-					Server:    "...",
+					Server:    app.Cluster.Server,
 					Namespace: "...",
 				},
 			},
