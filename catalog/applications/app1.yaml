@@ -4,3 +4,4 @@ environment: uat
 repoURL: https://github.com/celeguim/gitops.git
 path: charts/microservice
 targetRevision: HEAD
+applicationset: platform

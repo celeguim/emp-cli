@@ -19,6 +19,7 @@ func defaultRenderers() []contracts.Renderer {
 	return []contracts.Renderer{
 		renderers.NewApplication(),
 		renderers.NewProject(),
+		renderers.NewApplicationSet(),
 		// renderers.NewEnvironment(),
 		// renderers.NewCluster(),
 	}

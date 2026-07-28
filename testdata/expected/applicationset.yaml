@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+
+metadata:
+  name: platform
+  namespace: argocd
+
+spec:
+  generators:
+    - list:
+        elements:
+          - name: payments
+            path: services/payments
+          - name: orders
+            path: services/orders
+
+  template:
+    metadata:
+      name: "{{name}}"
+
+    spec:
+      project: default
+
+      source:
+        repoURL: https://github.com/celeguim/gitops.git
+        targetRevision: main
+        path: "{{path}}"
+
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+        
