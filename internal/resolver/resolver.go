@@ -14,25 +14,14 @@ func New() *Resolver {
 }
 
 func Resolve(cat *catalog.Catalog) (*resolved.Catalog, error) {
-	// environments := make(map[string]catalog.Environment, len(cat.Environments))
-	// for _, env := range cat.Environments {
-	// 	fmt.Println(env)
-	// 	environments[env.Object.Project] = env.Object
-	// }
 
-	// clusters := make(map[string]catalog.Cluster, len(cat.Clusters))
-	// for _, cluster := range cat.Clusters {
-	// 	fmt.Println(cluster)
-	// 	clusters[cluster.Object.Environment] = cluster.Object
-	// }
-
-	// rc := &resolved.Catalog{Applications: make([]resolved.ResolvedApplication, 0, len(cat.Applications))}
-
+	// env map
 	envIndex := make(map[string]catalog.Environment, len(cat.Environments))
 	for _, env := range cat.Environments {
 		envIndex[env.Object.Name] = env.Object
 	}
 
+	// cluster map
 	clusterIndex := make(map[string]catalog.Cluster, len(cat.Clusters))
 	for _, cluster := range cat.Clusters {
 		clusterIndex[cluster.Object.Name] = cluster.Object
@@ -41,26 +30,6 @@ func Resolve(cat *catalog.Catalog) (*resolved.Catalog, error) {
 	rc := &resolved.Catalog{
 		Applications: make([]resolved.Application, 0, len(cat.Applications)),
 	}
-
-	//
-	//
-	// for _, app := range cat.Applications {
-	// 	env, ok := environments[app.Object.Project]
-	// 	if !ok {
-	// 		return nil, fmt.Errorf("application %q references unknown project %q", app.Object.Name, app.Object.Project)
-	// 	}
-
-	// 	cluster, ok := clusters[env.Name]
-	// 	if !ok {
-	// 		return nil, fmt.Errorf("environment %q has no cluster", env.Name)
-	// 	}
-
-	// 	rc.Applications = append(rc.Applications, resolved.ResolvedApplication{
-	// 		Application: app.Object,
-	// 		Environment: env,
-	// 		Cluster:     cluster,
-	// 	})
-	// }
 
 	for _, app := range cat.Applications {
 
@@ -87,6 +56,21 @@ func Resolve(cat *catalog.Catalog) (*resolved.Catalog, error) {
 			Environment: env,
 			Cluster:     cluster,
 		})
+	}
+
+	// project map
+	projects := map[string]*resolved.Project{}
+	// for _, p := range projects {
+	for _, app := range rc.Applications {
+		name := app.Environment.Project
+		project, ok := projects[name]
+		if !ok {
+			project = &resolved.Project{
+				Name: name,
+			}
+			projects[name] = project
+		}
+		rc.Projects = append(rc.Projects, *project)
 	}
 
 	return rc, nil
