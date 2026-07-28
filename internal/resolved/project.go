@@ -7,6 +7,7 @@ type Project struct {
 }
 
 type Destination struct {
+	Name      string
 	Server    string
 	Namespace string
 }

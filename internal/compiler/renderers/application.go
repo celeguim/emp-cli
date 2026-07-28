@@ -4,8 +4,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/celeguim/emp-cli/internal/argocd"
 	"github.com/celeguim/emp-cli/internal/compiler/contracts"
+	"github.com/celeguim/emp-cli/internal/compiler/manifests"
 	"github.com/celeguim/emp-cli/internal/resolved"
 	"go.yaml.in/yaml/v2"
 )
@@ -26,30 +26,9 @@ func (r *Application) Render(ctx *contracts.Context, cat *resolved.Catalog) erro
 
 	for _, app := range cat.Applications {
 
-		argoApp := argocd.Application{
-			APIVersion: "argoproj.io/v1alpha1",
-			Kind:       "Application",
-			Metadata: argocd.Metadata{
-				Name:      app.Application.Name,
-				Namespace: "argocd",
-			},
-			Spec: argocd.ApplicationSpec{
-				Project: app.Environment.Project,
-				Source: argocd.Source{
-					RepoURL:        app.Application.RepoURL,
-					Path:           app.Application.Path,
-					TargetRevision: app.Environment.TargetRevision,
-				},
-				Destination: argocd.Destination{
-					Server:    app.Cluster.Server,
-					Namespace: app.Environment.Namespace,
-				},
-			},
-		}
+		manifest := manifests.NewApplication(app)
 
-		data, err := yaml.Marshal(argoApp)
-		// data, err := yaml.Marshal(app.Object)
-
+		data, err := yaml.Marshal(manifest)
 		if err != nil {
 			return err
 		}

@@ -18,6 +18,7 @@ type Compiler struct {
 func defaultRenderers() []contracts.Renderer {
 	return []contracts.Renderer{
 		renderers.NewApplication(),
+		renderers.NewProject(),
 		// renderers.NewEnvironment(),
 		// renderers.NewCluster(),
 	}
