@@ -12,10 +12,10 @@ func env(path, name, project, revision, namespace string) catalog.Document[catal
 	return catalog.Document[catalog.Environment]{
 		Path: path,
 		Object: catalog.Environment{
-			Name:           name,
-			Project:        project,
-			TargetRevision: revision,
-			Namespace:      namespace,
+			Name:    name,
+			Project: project,
+			// TargetRevision: revision,
+			Namespace: namespace,
 		},
 	}
 }

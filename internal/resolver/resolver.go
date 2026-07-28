@@ -14,32 +14,75 @@ func New() *Resolver {
 }
 
 func Resolve(cat *catalog.Catalog) (*resolved.Catalog, error) {
-	environments := make(map[string]catalog.Environment, len(cat.Environments))
+	// environments := make(map[string]catalog.Environment, len(cat.Environments))
+	// for _, env := range cat.Environments {
+	// 	fmt.Println(env)
+	// 	environments[env.Object.Project] = env.Object
+	// }
+
+	// clusters := make(map[string]catalog.Cluster, len(cat.Clusters))
+	// for _, cluster := range cat.Clusters {
+	// 	fmt.Println(cluster)
+	// 	clusters[cluster.Object.Environment] = cluster.Object
+	// }
+
+	// rc := &resolved.Catalog{Applications: make([]resolved.ResolvedApplication, 0, len(cat.Applications))}
+
+	envIndex := make(map[string]catalog.Environment, len(cat.Environments))
 	for _, env := range cat.Environments {
-		fmt.Println(env)
-		environments[env.Object.Project] = env.Object
+		envIndex[env.Object.Name] = env.Object
 	}
 
-	clusters := make(map[string]catalog.Cluster, len(cat.Clusters))
+	clusterIndex := make(map[string]catalog.Cluster, len(cat.Clusters))
 	for _, cluster := range cat.Clusters {
-		fmt.Println(cluster)
-		clusters[cluster.Object.Environment] = cluster.Object
+		clusterIndex[cluster.Object.Name] = cluster.Object
 	}
 
-	rc := &resolved.Catalog{Applications: make([]resolved.ResolvedApplication, 0, len(cat.Applications))}
+	rc := &resolved.Catalog{
+		Applications: make([]resolved.Application, 0, len(cat.Applications)),
+	}
+
+	//
+	//
+	// for _, app := range cat.Applications {
+	// 	env, ok := environments[app.Object.Project]
+	// 	if !ok {
+	// 		return nil, fmt.Errorf("application %q references unknown project %q", app.Object.Name, app.Object.Project)
+	// 	}
+
+	// 	cluster, ok := clusters[env.Name]
+	// 	if !ok {
+	// 		return nil, fmt.Errorf("environment %q has no cluster", env.Name)
+	// 	}
+
+	// 	rc.Applications = append(rc.Applications, resolved.ResolvedApplication{
+	// 		Application: app.Object,
+	// 		Environment: env,
+	// 		Cluster:     cluster,
+	// 	})
+	// }
 
 	for _, app := range cat.Applications {
-		env, ok := environments[app.Object.Project]
+
+		env, ok := envIndex[app.Object.Environment]
 		if !ok {
-			return nil, fmt.Errorf("application %q references unknown project %q", app.Object.Name, app.Object.Project)
+			return nil, fmt.Errorf(
+				"application %q references unknown environment %q",
+				app.Object.Name,
+				app.Object.Environment,
+			)
 		}
 
-		cluster, ok := clusters[env.Name]
+		cluster, ok := clusterIndex[env.Cluster]
 		if !ok {
-			return nil, fmt.Errorf("environment %q has no cluster", env.Name)
+			return nil, fmt.Errorf(
+				"environment %q references unknown cluster %q",
+				env.Name,
+				env.Cluster,
+			)
 		}
 
-		rc.Applications = append(rc.Applications, resolved.ResolvedApplication{
+		rc.Applications = append(rc.Applications, resolved.Application{
 			Application: app.Object,
 			Environment: env,
 			Cluster:     cluster,

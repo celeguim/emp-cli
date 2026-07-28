@@ -1,8 +1,6 @@
 ---
 name: gitops1
-project: default
-chart: microservice
-
-source:
-  repoURL: https://github.com/celeguim/gitops.git
-  path: charts/microservice
+environment: uat
+repoURL: https://github.com/celeguim/gitops.git
+path: charts/microservice
+targetRevision: HEAD

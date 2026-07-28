@@ -3,10 +3,10 @@ package resolved
 import "github.com/celeguim/emp-cli/internal/catalog"
 
 type Catalog struct {
-	Applications []ResolvedApplication
+	Applications []Application
 }
 
-type ResolvedApplication struct {
+type Application struct {
 	Application catalog.Application
 	Environment catalog.Environment
 	Cluster     catalog.Cluster

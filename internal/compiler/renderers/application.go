@@ -10,11 +10,7 @@ import (
 	"go.yaml.in/yaml/v2"
 )
 
-// compiler/renderers/application.go
-
-type Application struct {
-	// ...
-}
+type Application struct{}
 
 func NewApplication() *Application {
 	return &Application{}
@@ -40,8 +36,8 @@ func (r *Application) Render(ctx *contracts.Context, cat *resolved.Catalog) erro
 			Spec: argocd.ApplicationSpec{
 				Project: app.Environment.Project,
 				Source: argocd.Source{
-					RepoURL:        app.Application.Source.RepoURL,
-					Path:           app.Application.Source.Path,
+					RepoURL:        app.Application.RepoURL,
+					Path:           app.Application.Path,
 					TargetRevision: app.Environment.TargetRevision,
 				},
 				Destination: argocd.Destination{

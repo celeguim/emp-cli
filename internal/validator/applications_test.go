@@ -10,8 +10,8 @@ func app(path, name, chart string) catalog.Document[catalog.Application] {
 	return catalog.Document[catalog.Application]{
 		Path: path,
 		Object: catalog.Application{
-			Name:  name,
-			Chart: chart,
+			Name: name,
+			// Chart: chart,
 		},
 	}
 }

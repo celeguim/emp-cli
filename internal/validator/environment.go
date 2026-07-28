@@ -15,7 +15,7 @@ func (v *Validator) validateEnvironments(
 
 	v.validateEnvironmentNames(cat, report)
 	v.validateEnvironmentProjects(cat, report)
-	v.validateEnvironmentTargetRevisions(cat, report)
+	// v.validateEnvironmentTargetRevisions(cat, report)
 	v.validateEnvironmentNamespaces(cat, report)
 }
 
@@ -75,22 +75,22 @@ func (v *Validator) validateEnvironmentProjects(
 	}
 }
 
-func (v *Validator) validateEnvironmentTargetRevisions(
-	cat *catalog.Catalog,
-	report *Report,
-) {
-	for _, doc := range cat.Environments {
+// func (v *Validator) validateEnvironmentTargetRevisions(
+// 	cat *catalog.Catalog,
+// 	report *Report,
+// ) {
+// 	for _, doc := range cat.Environments {
 
-		if strings.TrimSpace(doc.Object.TargetRevision) == "" {
-			report.Add(Error{
-				File:    doc.Path,
-				Name:    doc.Object.Name,
-				Field:   "targetRevision",
-				Message: "is required",
-			})
-		}
-	}
-}
+// 		if strings.TrimSpace(doc.Object.TargetRevision) == "" {
+// 			report.Add(Error{
+// 				File:    doc.Path,
+// 				Name:    doc.Object.Name,
+// 				Field:   "targetRevision",
+// 				Message: "is required",
+// 			})
+// 		}
+// 	}
+// }
 
 func (v *Validator) validateEnvironmentNamespaces(
 	cat *catalog.Catalog,

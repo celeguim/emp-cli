@@ -20,8 +20,8 @@ func TestResolveClusterEnvironment(t *testing.T) {
 			{
 				Path: "clusters/dev-eks.yaml",
 				Object: catalog.Cluster{
-					ClusterName: "dev-eks",
-					Environment: "dev",
+					Name: "dev-eks",
+					// Environment: "dev",
 				},
 			},
 		},
@@ -39,8 +39,8 @@ func TestResolveUnknownEnvironment(t *testing.T) {
 			{
 				Path: "clusters/dev-eks.yaml",
 				Object: catalog.Cluster{
-					ClusterName: "dev-eks",
-					Environment: "dev",
+					Name: "dev-eks",
+					// Environment: "dev",
 				},
 			},
 		},

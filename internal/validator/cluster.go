@@ -13,7 +13,7 @@ func (v *Validator) validateClusters(
 ) {
 	v.validateClusterNames(cat, report)
 	v.validateClusterServers(cat, report)
-	v.validateClusterEnvironments(cat, report)
+	// v.validateClusterEnvironments(cat, report)
 }
 
 func (v *Validator) validateClusterNames(
@@ -24,12 +24,12 @@ func (v *Validator) validateClusterNames(
 
 	for _, doc := range cat.Clusters {
 
-		name := strings.TrimSpace(doc.Object.ClusterName)
+		name := strings.TrimSpace(doc.Object.Name)
 
 		if name == "" {
 			report.Add(Error{
 				File:    doc.Path,
-				Name:    doc.Object.ClusterName,
+				Name:    doc.Object.Name,
 				Field:   "clusterName",
 				Message: "is required",
 			})
@@ -39,7 +39,7 @@ func (v *Validator) validateClusterNames(
 		if previous, ok := seen[name]; ok {
 			report.Add(Error{
 				File:  doc.Path,
-				Name:  doc.Object.ClusterName,
+				Name:  doc.Object.Name,
 				Field: "clusterName",
 				Message: fmt.Sprintf(
 					"duplicate cluster %q (already declared in %s)",
@@ -63,7 +63,7 @@ func (v *Validator) validateClusterServers(
 		if strings.TrimSpace(doc.Object.Server) == "" {
 			report.Add(Error{
 				File:    doc.Path,
-				Name:    doc.Object.ClusterName,
+				Name:    doc.Object.Name,
 				Field:   "server",
 				Message: "is required",
 			})
@@ -71,19 +71,18 @@ func (v *Validator) validateClusterServers(
 	}
 }
 
-func (v *Validator) validateClusterEnvironments(
-	cat *catalog.Catalog,
-	report *Report,
-) {
-	for _, doc := range cat.Clusters {
-
-		if strings.TrimSpace(doc.Object.Environment) == "" {
-			report.Add(Error{
-				File:    doc.Path,
-				Name:    doc.Object.ClusterName,
-				Field:   "environment",
-				Message: "is required",
-			})
-		}
-	}
-}
+// func (v *Validator) validateClusterEnvironments(
+// 	cat *catalog.Catalog,
+// 	report *Report,
+// ) {
+// 	for _, doc := range cat.Clusters {
+// 		if strings.TrimSpace(doc.Object.Environment) == "" {
+// 			report.Add(Error{
+// 				File:    doc.Path,
+// 				Name:    doc.Object.Name,
+// 				Field:   "environment",
+// 				Message: "is required",
+// 			})
+// 		}
+// 	}
+// }

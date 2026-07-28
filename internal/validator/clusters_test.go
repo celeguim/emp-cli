@@ -10,9 +10,9 @@ func cluster(path, name, server, environment string) catalog.Document[catalog.Cl
 	return catalog.Document[catalog.Cluster]{
 		Path: path,
 		Object: catalog.Cluster{
-			ClusterName: name,
-			Server:      server,
-			Environment: environment,
+			Name:   name,
+			Server: server,
+			// Environment: environment,
 		},
 	}
 }

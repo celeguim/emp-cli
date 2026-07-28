@@ -1,9 +1,6 @@
 package catalog
 
 type Cluster struct {
-	ClusterName string `yaml:"clusterName"`
-
+	Name   string `yaml:"name"`
 	Server string `yaml:"server"`
-
-	Environment string `yaml:"environment"`
 }

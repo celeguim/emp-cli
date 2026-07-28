@@ -14,11 +14,11 @@ func (r *Resolver) resolveClusters(cat *catalog.Catalog) error {
 	}
 
 	for _, cluster := range cat.Clusters {
-		if _, ok := envs[cluster.Object.Environment]; !ok {
+		if _, ok := envs[cluster.Object.Name]; !ok {
 			return fmt.Errorf(
 				"cluster %q references unknown environment %q",
-				cluster.Object.ClusterName,
-				cluster.Object.Environment,
+				cluster.Object.Name,
+				envs[cluster.Object.Name],
 			)
 		}
 	}

@@ -12,23 +12,23 @@ func (v *Validator) validateApplications(
 	report *Report,
 ) {
 	v.validateApplicationNames(cat, report)
-	v.validateApplicationCharts(cat, report)
+	// v.validateApplicationCharts(cat, report)
 }
 
-func (v *Validator) validateApplicationCharts(
-	cat *catalog.Catalog,
-	report *Report,
-) {
-	for _, doc := range cat.Applications {
-		if strings.TrimSpace(doc.Object.Chart) == "" {
-			report.Add(Error{
-				File:    doc.Path,
-				Field:   "chart",
-				Message: "is required",
-			})
-		}
-	}
-}
+// func (v *Validator) validateApplicationCharts(
+// 	cat *catalog.Catalog,
+// 	report *Report,
+// ) {
+// 	for _, doc := range cat.Applications {
+// 		if strings.TrimSpace(doc.Object.Chart) == "" {
+// 			report.Add(Error{
+// 				File:    doc.Path,
+// 				Field:   "chart",
+// 				Message: "is required",
+// 			})
+// 		}
+// 	}
+// }
 
 func (v *Validator) validateApplicationNames(
 	cat *catalog.Catalog,
