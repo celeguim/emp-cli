@@ -1,8 +1,6 @@
 package resolver
 
 import (
-	"fmt"
-
 	"github.com/celeguim/emp-cli/internal/resolved"
 )
 
@@ -13,8 +11,6 @@ func resolveProjects(rc *resolved.Catalog) error {
 	for _, app := range rc.Applications {
 
 		projectName := app.Environment.Project
-
-		fmt.Printf("Resolving project: %s\n", projectName)
 
 		project, ok := projects[projectName]
 		if !ok {
@@ -48,11 +44,6 @@ func resolveProjects(rc *resolved.Catalog) error {
 
 	for _, project := range projects {
 		rc.Projects = append(rc.Projects, *project)
-	}
-
-	fmt.Println("Projects resolved:", len(rc.Projects))
-	for _, p := range rc.Projects {
-		fmt.Printf("%+v\n", p)
 	}
 
 	return nil

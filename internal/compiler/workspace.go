@@ -1,7 +1,6 @@
 package compiler
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -33,10 +32,6 @@ func (w *Workspace) CompilerDir() string {
 
 func (w *Workspace) ApplicationsDir() string {
 	thepath := filepath.Join(w.Root, "generated", "applications")
-
-	fmt.Printf(
-		"l.root: %s , thepath: %s\n",
-		w.Root, thepath)
 
 	return thepath
 }

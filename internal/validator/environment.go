@@ -11,7 +11,6 @@ func (v *Validator) validateEnvironments(
 	cat *catalog.Catalog,
 	report *Report,
 ) {
-	println("Validating environments...")
 
 	v.validateEnvironmentNames(cat, report)
 	v.validateEnvironmentProjects(cat, report)
@@ -27,8 +26,6 @@ func (v *Validator) validateEnvironmentNames(
 
 	for _, doc := range cat.Environments {
 		name := strings.TrimSpace(doc.Object.Name)
-
-		println("Validating environment name:", name, "from file:", doc.Path)
 
 		if name == "" {
 			report.Add(Error{
