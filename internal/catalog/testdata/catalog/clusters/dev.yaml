@@ -1,0 +1,2 @@
+name: dev
+server: https://kubernetes.default.svc

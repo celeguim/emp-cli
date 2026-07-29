@@ -1,0 +1,4 @@
+name: payments
+environment: dev
+repoURL: https://github.com/company/gitops.git
+path: services/payments

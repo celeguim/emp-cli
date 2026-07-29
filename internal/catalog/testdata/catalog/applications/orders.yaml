@@ -1,0 +1,4 @@
+name: orders
+environment: dev
+repoURL: https://github.com/company/gitops.git
+path: services/orders

@@ -1,6 +1,7 @@
 package catalog
 
 import (
+	"fmt"
 	"path/filepath"
 )
 
@@ -12,6 +13,7 @@ type Catalog struct {
 
 func (l *FilesystemLoader) applicationsDir() string {
 	thepath := filepath.Join(l.Root, "catalog", "applications")
+	fmt.Printf("applicationDir(): %s\n", thepath)
 	return thepath
 
 }

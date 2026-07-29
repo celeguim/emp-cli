@@ -8,10 +8,8 @@ import (
 
 func TestLoad(t *testing.T) {
 
-	loader := NewFilesystemLoader("testdata/catalog")
-
+	loader := NewFilesystemLoader("testdata")
 	cat, err := loader.Load()
-
 	require.NoError(t, err)
 
 	require.Len(t, cat.Applications, 2)
