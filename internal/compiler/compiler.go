@@ -28,7 +28,8 @@ func defaultRenderers() []contracts.Renderer {
 func NewCompiler(root string) *Compiler {
 	return &Compiler{
 		context: &contracts.Context{
-			Root: filepath.Join(root, ".emp"),
+			Root:   filepath.Join(root, ".emp"),
+			Writer: renderers.NewWriter(filepath.Join(root, ".emp")),
 		},
 		renderers: defaultRenderers(),
 	}
