@@ -1,0 +1,6 @@
+---
+name: dev
+cluster: cluster1
+namespace: default
+project: project1
+targetRevision: HEAD

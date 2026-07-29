@@ -1,0 +1,4 @@
+---
+# clusterName: cluster1
+name: cluster1
+server: https://kubernetes.default.svc
