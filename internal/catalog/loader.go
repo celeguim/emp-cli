@@ -7,7 +7,6 @@ type Loaded[T any] struct {
 
 type Loader interface {
 	Load() (*Catalog, error)
-	// LoadTest(path string) (*Catalog, error)
 }
 
 func (l *FilesystemLoader) Load() (*Catalog, error) {
@@ -19,6 +18,11 @@ func (l *FilesystemLoader) Load() (*Catalog, error) {
 		return nil, err
 	}
 
+	c.Applications, err = l.loadApplications()
+	if err != nil {
+		return nil, err
+	}
+
 	c.Clusters, err = l.loadClusters()
 	if err != nil {
 		return nil, err
@@ -26,13 +30,3 @@ func (l *FilesystemLoader) Load() (*Catalog, error) {
 
 	return &c, nil
 }
-
-// func (l *FilesystemLoader) LoadTest(path string) (*Catalog, error) {
-// 	var c Catalog
-// 	var err error
-
-// 	c.Applications, err = l.loadApplicationsTest(path)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// }

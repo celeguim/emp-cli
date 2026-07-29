@@ -1,6 +1,7 @@
 package compiler
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -41,10 +42,13 @@ func (c *Compiler) Compile(cat *resolved.Catalog) error {
 	}
 
 	for _, r := range c.renderers {
+		fmt.Printf("running %T\n", r)
+
 		if err := r.Render(c.context, cat); err != nil {
 			return err
 		}
 	}
 
+	fmt.Println("renderers:", len(c.renderers))
 	return nil
 }

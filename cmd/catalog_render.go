@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"path/filepath"
 
 	"github.com/spf13/cobra"
@@ -29,6 +30,11 @@ var catalogRenderCmd = &cobra.Command{
 		}
 
 		resolvedCatalog, err := resolver.Resolve(cat)
+
+		fmt.Printf("Applications: %d\n", len(resolvedCatalog.Applications))
+		fmt.Printf("Projects: %d\n", len(resolvedCatalog.Projects))
+		fmt.Printf("ApplicationSets: %d\n", len(resolvedCatalog.ApplicationSets))
+
 		if err != nil {
 			return err
 		}

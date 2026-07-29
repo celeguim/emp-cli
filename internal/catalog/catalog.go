@@ -11,9 +11,7 @@ type Catalog struct {
 }
 
 func (l *FilesystemLoader) applicationsDir() string {
-
 	thepath := filepath.Join(l.Root, "catalog", "applications")
-
 	return thepath
 
 }

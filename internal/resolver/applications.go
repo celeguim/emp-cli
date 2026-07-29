@@ -9,6 +9,10 @@ import (
 
 func resolveApplications(cat *catalog.Catalog, rc *resolved.Catalog) error {
 
+	fmt.Println("catalog apps:", len(cat.Applications))
+	fmt.Println("catalog envs:", len(cat.Environments))
+	fmt.Println("catalog clusters:", len(cat.Clusters))
+
 	envIndex := make(map[string]catalog.Environment, len(cat.Environments))
 	for _, env := range cat.Environments {
 		envIndex[env.Object.Name] = env.Object
