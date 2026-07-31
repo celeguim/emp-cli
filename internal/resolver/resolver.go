@@ -27,5 +27,7 @@ func Resolve(cat *catalog.Catalog) (*resolved.Catalog, error) {
 		return nil, err
 	}
 
+	// fmt.Printf("%+v\n", resolved.Application)
+
 	return rc, nil
 }

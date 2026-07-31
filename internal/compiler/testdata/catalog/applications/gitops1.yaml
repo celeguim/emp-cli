@@ -5,3 +5,8 @@ repoURL: https://github.com/celeguim/gitops.git
 path: charts/microservice
 targetRevision: HEAD
 applicationset: dev1
+SyncPolicy:
+  automated:
+    enabled: true
+    prune: true
+    selfHeal: true

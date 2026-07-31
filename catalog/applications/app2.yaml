@@ -4,3 +4,10 @@ environment: uat
 repoURL: https://github.com/celeguim/gitops.git
 path: charts/microservice
 targetRevision: HEAD
+syncPolicy:
+  automated:
+    enabled: true
+    prune: true
+    selfHeal: true
+  # syncOptions:
+  #   - CreateNamespace=true
