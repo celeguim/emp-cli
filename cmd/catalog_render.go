@@ -31,6 +31,14 @@ var catalogRenderCmd = &cobra.Command{
 
 		resolvedCatalog, err := resolver.Resolve(cat)
 
+		if err != nil {
+			return err
+		}
+
+		if resolvedCatalog == nil {
+			return fmt.Errorf("resolver returned nil catalog")
+		}
+
 		fmt.Printf("Applications: %d\n", len(resolvedCatalog.Applications))
 		fmt.Printf("Projects: %d\n", len(resolvedCatalog.Projects))
 		fmt.Printf("ApplicationSets: %d\n", len(resolvedCatalog.ApplicationSets))

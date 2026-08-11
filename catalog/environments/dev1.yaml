@@ -1,7 +1,8 @@
 ---
 name: dev
 project: dev
-cluster: https://kubernetes.default.svc
+cluster: c1
 repoURL: https://github.com/example/repo.git
 namespace: default
 targetRevision: HEAD
+syncPolicy: enabled

@@ -3,5 +3,6 @@ name: uat
 namespace: default
 project: uat
 targetRevision: HEAD
-cluster: https://kubernetes.default.svc
+cluster: c2
 repoURL: https://github.com/example/repo.git
+syncPolicy: enabled

@@ -3,5 +3,6 @@ name: prd
 namespace: default
 project: prd
 targetRevision: HEAD
-cluster: https://kubernetes.default.svc
+cluster: c1
 repoURL: https://github.com/example/repo.git
+syncPolicy: disabled

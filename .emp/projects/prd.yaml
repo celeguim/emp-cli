@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: prd
+  namespace: argocd
+spec:
+  sourceRepos:
+  - https://github.com/example/repo.git
+  destinations:
+  - server: adsfdsafdsa
+    namespace: default
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
