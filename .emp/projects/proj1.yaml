@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: proj1
+  namespace: argocd
+spec:
+  sourceRepos:
+  - asdfadsfasdfasd
+  destinations:
+  - server: k8s.c2
+    namespace: DEFAULT-NS-change
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'

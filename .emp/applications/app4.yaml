@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app4
+  namespace: argocd
+spec:
+  project: proj1
+  source:
+    repoURL: asdfadsfasdfasd
+    path: charts/app4
+    targetRevision: HEAD
+  destination:
+    server: k8s.c2
+    namespace: DEFAULT-NS-change
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
