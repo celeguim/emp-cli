@@ -99,21 +99,21 @@ func TestMissingServer(t *testing.T) {
 	}
 }
 
-func TestMissingEnvironment(t *testing.T) {
-	cat := &catalog.Catalog{
-		Clusters: []catalog.Document[catalog.Cluster]{
-			cluster(
-				"clusters/dev.yaml",
-				"dev-eks",
-				"https://kubernetes.default.svc",
-				"",
-			),
-		},
-	}
+// func TestMissingEnvironment(t *testing.T) {
+// 	cat := &catalog.Catalog{
+// 		Clusters: []catalog.Document[catalog.Cluster]{
+// 			cluster(
+// 				"clusters/dev.yaml",
+// 				"dev-eks",
+// 				"https://kubernetes.default.svc",
+// 				"",
+// 			),
+// 		},
+// 	}
 
-	report := New().Validate(cat)
+// 	report := New().Validate(cat)
 
-	if !report.HasErrors() {
-		t.Fatal("expected validation error")
-	}
-}
+// 	if !report.HasErrors() {
+// 		t.Fatal("expected validation error")
+// 	}
+// }

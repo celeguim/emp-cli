@@ -1,0 +1,5 @@
+name: app3
+environment: prd
+repoURL: https://github.com/example/repo.git
+path: charts/app3
+project: prd

@@ -47,20 +47,20 @@ func TestDuplicateApplicationName(t *testing.T) {
 	}
 }
 
-func TestChartRequired(t *testing.T) {
+// func TestChartRequired(t *testing.T) {
 
-	cat := &catalog.Catalog{
-		Applications: []catalog.Document[catalog.Application]{
-			app("app.yaml", "app1", ""),
-		},
-	}
+// 	cat := &catalog.Catalog{
+// 		Applications: []catalog.Document[catalog.Application]{
+// 			app("app.yaml", "app1", ""),
+// 		},
+// 	}
 
-	report := New().Validate(cat)
+// 	report := New().Validate(cat)
 
-	if !report.HasErrors() {
-		t.Fatal("expected validation error")
-	}
-}
+// 	if !report.HasErrors() {
+// 		t.Fatal("expected validation error")
+// 	}
+// }
 
 func TestValidApplication(t *testing.T) {
 

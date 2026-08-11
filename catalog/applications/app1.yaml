@@ -1,7 +1,4 @@
----
-name: gitops1
+name: app1
 environment: uat
-repoURL: https://github.com/celeguim/gitops.git
-path: charts/microservice
-targetRevision: HEAD
-applicationset: platform
+repoURL: https://github.com/example/repo.git
+path: charts/app1

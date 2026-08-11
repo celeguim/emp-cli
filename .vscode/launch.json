@@ -13,7 +13,5 @@
             "args": ["catalog","render"],
             "dlvFlags": ["--check-go-version=false"],
         },
-
-
     ]
 }

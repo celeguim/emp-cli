@@ -1,13 +1,4 @@
----
-name: gitops2
-environment: uat
-repoURL: https://github.com/celeguim/gitops.git
-path: charts/microservice
-targetRevision: HEAD
-syncPolicy:
-  automated:
-    enabled: true
-    prune: true
-    selfHeal: true
-  # syncOptions:
-  #   - CreateNamespace=true
+name: app2
+environment: dev
+repoURL: https://github.com/example/repo.git
+path: charts/app2

@@ -6,4 +6,5 @@ type Environment struct {
 	Cluster        string `yaml:"cluster"`
 	Namespace      string `yaml:"namespace"`
 	TargetRevision string `yaml:"targetRevision"`
+	SyncPolicy     string `yaml:"syncPolicy,omitempty"`
 }

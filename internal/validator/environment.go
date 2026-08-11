@@ -14,8 +14,10 @@ func (v *Validator) validateEnvironments(
 
 	v.validateEnvironmentNames(cat, report)
 	v.validateEnvironmentProjects(cat, report)
-	// v.validateEnvironmentTargetRevisions(cat, report)
+	v.validateEnvironmentTargetRevisions(cat, report)
 	v.validateEnvironmentNamespaces(cat, report)
+	v.validateEnvironmentSyncPolicies(cat, report)
+
 }
 
 func (v *Validator) validateEnvironmentNames(
@@ -72,22 +74,22 @@ func (v *Validator) validateEnvironmentProjects(
 	}
 }
 
-// func (v *Validator) validateEnvironmentTargetRevisions(
-// 	cat *catalog.Catalog,
-// 	report *Report,
-// ) {
-// 	for _, doc := range cat.Environments {
+func (v *Validator) validateEnvironmentTargetRevisions(
+	cat *catalog.Catalog,
+	report *Report,
+) {
+	for _, doc := range cat.Environments {
 
-// 		if strings.TrimSpace(doc.Object.TargetRevision) == "" {
-// 			report.Add(Error{
-// 				File:    doc.Path,
-// 				Name:    doc.Object.Name,
-// 				Field:   "targetRevision",
-// 				Message: "is required",
-// 			})
-// 		}
-// 	}
-// }
+		if strings.TrimSpace(doc.Object.TargetRevision) == "" {
+			report.Add(Error{
+				File:    doc.Path,
+				Name:    doc.Object.Name,
+				Field:   "targetRevision",
+				Message: "is required",
+			})
+		}
+	}
+}
 
 func (v *Validator) validateEnvironmentNamespaces(
 	cat *catalog.Catalog,
@@ -101,6 +103,29 @@ func (v *Validator) validateEnvironmentNamespaces(
 				Name:    doc.Object.Name,
 				Field:   "namespace",
 				Message: "is required",
+			})
+		}
+	}
+
+}
+
+func (v *Validator) validateEnvironmentSyncPolicies(
+	cat *catalog.Catalog,
+	report *Report,
+) {
+	for _, doc := range cat.Environments {
+		policy := strings.TrimSpace(doc.Object.SyncPolicy)
+
+		if policy == "" {
+			continue
+		}
+
+		if policy != "enabled" && policy != "disabled" {
+			report.Add(Error{
+				File:    doc.Path,
+				Name:    doc.Object.Name,
+				Field:   "syncPolicy",
+				Message: "must be 'enabled' or 'disabled'",
 			})
 		}
 	}

@@ -1,0 +1,7 @@
+---
+name: prd
+namespace: default
+project: prd
+targetRevision: HEAD
+cluster: https://kubernetes.default.svc
+repoURL: https://github.com/example/repo.git

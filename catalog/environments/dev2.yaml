@@ -1,0 +1,6 @@
+name: dev2
+project: default
+cluster: c1
+repoURL: dev2.git
+targetRevision: HEAD
+namespace: x

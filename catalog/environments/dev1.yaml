@@ -1,0 +1,7 @@
+---
+name: dev
+project: dev
+cluster: https://kubernetes.default.svc
+repoURL: https://github.com/example/repo.git
+namespace: default
+targetRevision: HEAD

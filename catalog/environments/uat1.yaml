@@ -1,0 +1,7 @@
+---
+name: uat
+namespace: default
+project: uat
+targetRevision: HEAD
+cluster: https://kubernetes.default.svc
+repoURL: https://github.com/example/repo.git

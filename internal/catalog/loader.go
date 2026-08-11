@@ -1,7 +1,5 @@
 package catalog
 
-import "fmt"
-
 type Loaded[T any] struct {
 	Path   string
 	Object T
@@ -30,7 +28,7 @@ func (l *FilesystemLoader) Load() (*Catalog, error) {
 		return nil, err
 	}
 
-	fmt.Printf("%+v\n", c.Applications[0].Object.SyncPolicy)
+	// fmt.Printf("%+v\n", c.Applications[0].Object.SyncPolicy)
 
 	return &c, nil
 }

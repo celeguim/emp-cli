@@ -1,4 +1,0 @@
----
-clusterName: minikube
-environment: uat
-server: https://kubernetes.default.svc

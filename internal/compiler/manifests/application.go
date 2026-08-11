@@ -1,8 +1,6 @@
 package manifests
 
 import (
-	"fmt"
-
 	"github.com/celeguim/emp-cli/internal/resolved"
 )
 
@@ -52,25 +50,42 @@ func NewApplication(app resolved.Application) Application {
 		},
 	}
 
-	fmt.Printf("SyncPolicy: %+v\n", manifest.Spec.SyncPolicy)
-
-	manifest.Spec.SyncPolicy = buildSyncPolicy(app)
+	// fmt.Printf("SyncPolicy: %+v\n", manifest.Spec.SyncPolicy)
+	// manifest.Spec.SyncPolicy = buildSyncPolicy(app)
 
 	return manifest
 }
 
-func buildSyncPolicy(app resolved.Application) *SyncPolicy {
+// func buildSyncPolicy(env Environment) *SyncPolicy {
+// 	if env.SyncPolicy != "enabled" {
+// 		return nil
+// 	}
 
-	sp := app.Application.SyncPolicy
+// 	switch env.Name {
+// 	case "dev":
+// 		return &SyncPolicy{
+// 			Automated: &Automated{
+// 				Enabled:  true,
+// 				Prune:    true,
+// 				SelfHeal: true,
+// 			},
+// 		}
 
-	if sp == nil || sp.Automated == nil || !sp.Automated.Enabled {
-		return nil
-	}
+// 	case "uat":
+// 		return &SyncPolicy{
+// 			Automated: &Automated{
+// 				Enabled: true,
+// 				Prune:   true,
+// 			},
+// 		}
 
-	return &SyncPolicy{
-		Automated: &Automated{
-			Prune:    sp.Automated.Prune,
-			SelfHeal: sp.Automated.SelfHeal,
-		},
-	}
-}
+// 	case "prd":
+// 		return &SyncPolicy{
+// 			Automated: &Automated{
+// 				Enabled: false,
+// 			},
+// 		}
+// 	}
+
+// 	return nil
+// }
