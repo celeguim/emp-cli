@@ -1,0 +1,2 @@
+name: minikube
+server: https://kubernetes.default.svc

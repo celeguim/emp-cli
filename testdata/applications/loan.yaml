@@ -1,0 +1,4 @@
+name: loan
+environment: uat
+repoURL: https://github.com/project1/manifests.git
+path: charts/loan

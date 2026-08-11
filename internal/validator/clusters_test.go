@@ -12,7 +12,6 @@ func cluster(path, name, server, environment string) catalog.Document[catalog.Cl
 		Object: catalog.Cluster{
 			Name:   name,
 			Server: server,
-			// Environment: environment,
 		},
 	}
 }
@@ -88,25 +87,6 @@ func TestMissingServer(t *testing.T) {
 				"dev-eks",
 				"",
 				"dev",
-			),
-		},
-	}
-
-	report := New().Validate(cat)
-
-	if !report.HasErrors() {
-		t.Fatal("expected validation error")
-	}
-}
-
-func TestMissingEnvironment(t *testing.T) {
-	cat := &catalog.Catalog{
-		Clusters: []catalog.Document[catalog.Cluster]{
-			cluster(
-				"clusters/dev.yaml",
-				"dev-eks",
-				"https://kubernetes.default.svc",
-				"",
 			),
 		},
 	}

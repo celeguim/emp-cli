@@ -1,21 +1,21 @@
 package validator
 
 import (
-	"fmt"
-	"path/filepath"
 	"testing"
 
 	"github.com/celeguim/emp-cli/internal/catalog"
 )
 
-func env(path, name, project, revision, namespace string) catalog.Document[catalog.Environment] {
+func env(path, name, project, cluster, repo, namespace, revision string) catalog.Document[catalog.Environment] {
 	return catalog.Document[catalog.Environment]{
 		Path: path,
 		Object: catalog.Environment{
-			Name:    name,
-			Project: project,
-			// TargetRevision: revision,
-			Namespace: namespace,
+			Name:           name,
+			Project:        project,
+			Cluster:        cluster,
+			RepoURL:        repo,
+			Namespace:      namespace,
+			TargetRevision: revision,
 		},
 	}
 }
@@ -23,7 +23,7 @@ func env(path, name, project, revision, namespace string) catalog.Document[catal
 func TestValidEnvironment(t *testing.T) {
 	cat := &catalog.Catalog{
 		Environments: []catalog.Document[catalog.Environment]{
-			env("env/dev.yaml", "dev", "payments", "main", "payments"),
+			env("env/env1.yaml", "env1", "project2", "cluster1", "repo:gitops", "payments", "main"),
 		},
 	}
 
@@ -35,22 +35,13 @@ func TestValidEnvironment(t *testing.T) {
 }
 
 func TestMissingEnvironmentName(t *testing.T) {
-	fmt.Println(filepath.Abs("."))
-
-	loader := catalog.NewFilesystemLoader("../..")
-	cat, err := loader.Load()
-	if err != nil {
-		t.Fatalf("failed to load catalog: %v", err)
+	cat := &catalog.Catalog{
+		Environments: []catalog.Document[catalog.Environment]{
+			env("env/env1.yaml", "", "project2", "cluster1", "repo:gitops", "payments", "main"),
+		},
 	}
 
-	// cat := &catalog.Catalog{
-	// 	Environments: []catalog.Document[catalog.Environment]{
-	// 		env("env/dev.yaml", "", "payments", "main", "payments"),
-	// 	},
-	// }
-
 	report := New().Validate(cat)
-	fmt.Println("REPORT ", report)
 
 	if !report.HasErrors() {
 		t.Fatal("expected validation error")
@@ -60,8 +51,8 @@ func TestMissingEnvironmentName(t *testing.T) {
 func TestDuplicateEnvironmentName(t *testing.T) {
 	cat := &catalog.Catalog{
 		Environments: []catalog.Document[catalog.Environment]{
-			env("env/dev.yaml", "dev", "payments", "main", "payments"),
-			env("env/dev2.yaml", "dev", "payments", "main", "payments"),
+			env("env/env1.yaml", "env1", "project2", "cluster1", "repo:gitops", "payments", "main"),
+			env("env/env1.yaml", "env1", "project2", "cluster1", "repo:gitops", "payments", "main"),
 		},
 	}
 
@@ -75,7 +66,7 @@ func TestDuplicateEnvironmentName(t *testing.T) {
 func TestMissingProject(t *testing.T) {
 	cat := &catalog.Catalog{
 		Environments: []catalog.Document[catalog.Environment]{
-			env("env/dev.yaml", "dev", "", "main", "payments"),
+			env("env/env1.yaml", "env1", "", "cluster1", "repo:gitops", "payments", "main"),
 		},
 	}
 
@@ -89,7 +80,7 @@ func TestMissingProject(t *testing.T) {
 func TestMissingTargetRevision(t *testing.T) {
 	cat := &catalog.Catalog{
 		Environments: []catalog.Document[catalog.Environment]{
-			env("env/dev.yaml", "dev", "payments", "", "payments"),
+			env("env/env1.yaml", "env1", "project2", "cluster1", "repo:gitops", "payments", ""),
 		},
 	}
 
@@ -103,7 +94,7 @@ func TestMissingTargetRevision(t *testing.T) {
 func TestMissingNamespace(t *testing.T) {
 	cat := &catalog.Catalog{
 		Environments: []catalog.Document[catalog.Environment]{
-			env("env/dev.yaml", "dev", "payments", "main", ""),
+			env("env/env1.yaml", "env1", "project2", "cluster1", "repo:gitops", "", "main"),
 		},
 	}
 

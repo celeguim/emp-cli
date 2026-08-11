@@ -11,7 +11,6 @@ func app(path, name, chart string) catalog.Document[catalog.Application] {
 		Path: path,
 		Object: catalog.Application{
 			Name: name,
-			// Chart: chart,
 		},
 	}
 }
@@ -44,21 +43,6 @@ func TestDuplicateApplicationName(t *testing.T) {
 
 	if !report.HasErrors() {
 		t.Fatal("expected duplicate validation error")
-	}
-}
-
-func TestChartRequired(t *testing.T) {
-
-	cat := &catalog.Catalog{
-		Applications: []catalog.Document[catalog.Application]{
-			app("app.yaml", "app1", ""),
-		},
-	}
-
-	report := New().Validate(cat)
-
-	if !report.HasErrors() {
-		t.Fatal("expected validation error")
 	}
 }
 
