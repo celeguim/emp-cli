@@ -1,0 +1,6 @@
+name: dev
+project: project1
+cluster: minikube
+namespace: dev
+targetRevision: dev
+syncPolicy: enabled

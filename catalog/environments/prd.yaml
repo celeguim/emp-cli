@@ -1,5 +1,6 @@
 name: prd
 project: project2
 cluster: minikube
-repoURL: https://gitops
-targetRevision: HEAD
+namespace: prod
+targetRevision: prd
+syncPolicy: disabled

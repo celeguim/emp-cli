@@ -1,7 +1,6 @@
----
 name: uat
 project: project1
-cluster: cluster1
-repoURL: https://github.com/project1/manifests.git
-namespace: default
-targetRevision: HEAD
+cluster: docker-desktop
+namespace: uat
+targetRevision: uat
+syncPolicy: enabled
