@@ -7,4 +7,5 @@ type Environment struct {
 	RepoURL        string `yaml:"repo"`
 	Namespace      string `yaml:"namespace"`
 	TargetRevision string `yaml:"targetRevision"`
+	SyncPolicy     string `yaml:"syncPolicy"`
 }

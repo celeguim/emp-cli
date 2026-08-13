@@ -1,6 +1,8 @@
 package manifests
 
-import "github.com/celeguim/emp-cli/internal/resolved"
+import (
+	"github.com/celeguim/emp-cli/internal/resolved"
+)
 
 type Application struct {
 	APIVersion string          `yaml:"apiVersion"`
@@ -13,6 +15,16 @@ type ApplicationSpec struct {
 	Project     string      `yaml:"project"`
 	Source      Source      `yaml:"source"`
 	Destination Destination `yaml:"destination"`
+	SyncPolicy  *SyncPolicy `yaml:"syncPolicy,omitempty"`
+}
+
+type SyncPolicy struct {
+	Automated *Automated `yaml:"automated,omitempty"`
+}
+
+type Automated struct {
+	Prune    bool `yaml:"prune,omitempty"`
+	SelfHeal bool `yaml:"selfHeal,omitempty"`
 }
 
 func NewApplication(app resolved.Application) Application {
@@ -35,6 +47,20 @@ func NewApplication(app resolved.Application) Application {
 				Server:    app.Cluster.Server,
 				Namespace: app.Environment.Namespace,
 			},
+			SyncPolicy: buildSyncPolicy(app.Environment.SyncPolicy),
+		},
+	}
+}
+
+func buildSyncPolicy(policy string) *SyncPolicy {
+	if policy != "enabled" {
+		return nil
+	}
+
+	return &SyncPolicy{
+		Automated: &Automated{
+			Prune:    true,
+			SelfHeal: true,
 		},
 	}
 }
