@@ -1,8 +1,0 @@
----
-name: prd
-namespace: default
-project: prd
-targetRevision: HEAD
-cluster: c1
-repoURL: https://github.com/example/repo.git
-syncPolicy: disabled

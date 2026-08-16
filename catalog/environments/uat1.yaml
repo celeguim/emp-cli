@@ -1,8 +1,0 @@
----
-name: uat
-namespace: default
-project: uat
-targetRevision: HEAD
-cluster: c2
-repoURL: https://github.com/example/repo.git
-syncPolicy: enabled

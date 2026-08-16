@@ -1,4 +1,5 @@
 name: app1
-environment: uat
+environment: env1
 repoURL: https://github.com/example/repo.git
 path: charts/app1
+project: project1

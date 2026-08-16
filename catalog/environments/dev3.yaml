@@ -1,6 +1,0 @@
-name: dev3
-project: proj1
-cluster: c1
-repoURL: gitops.git
-targetRevision: HEAD
-syncPolicy: enabled

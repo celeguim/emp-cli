@@ -6,13 +6,9 @@ metadata:
 spec:
   project: proj1
   source:
-    repoURL: asdfadsfasdfasd
+    repoURL: xxxxxxxxxxxxxxxxxxx
     path: charts/app4
-    targetRevision: HEAD
+    targetRevision: dev
   destination:
-    server: k8s.c2
-    namespace: DEFAULT-NS-change
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    server: adsfdsafdsa
+    namespace: yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy

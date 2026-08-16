@@ -1,8 +1,0 @@
----
-name: dev
-project: dev
-cluster: c1
-repoURL: https://github.com/example/repo.git
-namespace: default
-targetRevision: HEAD
-syncPolicy: enabled

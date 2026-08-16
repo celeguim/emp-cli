@@ -1,6 +1,0 @@
-name: dev4
-project: proj1
-cluster: c2
-targetRevision: HEAD
-namespace: DEFAULT-NS-change
-syncPolicy: enabled

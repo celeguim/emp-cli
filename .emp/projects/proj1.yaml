@@ -5,10 +5,10 @@ metadata:
   namespace: argocd
 spec:
   sourceRepos:
-  - asdfadsfasdfasd
+  - xxxxxxxxxxxxxxxxxxx
   destinations:
-  - server: k8s.c2
-    namespace: DEFAULT-NS-change
+  - server: adsfdsafdsa
+    namespace: yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'

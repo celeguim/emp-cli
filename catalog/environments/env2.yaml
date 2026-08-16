@@ -1,0 +1,6 @@
+name: env2
+project: project2
+cluster: cluster2
+namespace: ns2
+targetRevision: rev2
+syncPolicy: enabled

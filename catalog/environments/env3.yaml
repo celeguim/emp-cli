@@ -1,0 +1,6 @@
+name: env3
+project: project3
+cluster: cluster3
+namespace: ns3
+targetRevision: rev3
+syncPolicy: disabled

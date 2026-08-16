@@ -1,7 +1,0 @@
-name: dev2
-project: default
-cluster: c2
-repoURL: dev2.git
-targetRevision: HEAD
-namespace: x
-syncPolicy: enabled
