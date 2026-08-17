@@ -1,4 +1,0 @@
-name: payments
-environment: dev
-repoURL: https://github.com/project2/manifests.git
-path: charts/payments

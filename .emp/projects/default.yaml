@@ -5,13 +5,13 @@ metadata:
   namespace: argocd
 spec:
   sourceRepos:
-  - https://github.com/celeguim/gitops.git
+    - https://github.com/celeguim/gitops.git
   destinations:
-  - server: https://kubernetes.default.svc
-    namespace: default
+    - server: https://kubernetes.default.svc
+      namespace: default
   clusterResourceWhitelist:
-  - group: '*'
-    kind: '*'
+    - group: "*"
+      kind: "*"
   namespaceResourceWhitelist:
-  - group: '*'
-    kind: '*'
+    - group: "*"
+      kind: "*"

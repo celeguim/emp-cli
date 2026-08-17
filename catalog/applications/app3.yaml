@@ -1,0 +1,5 @@
+name: app3
+environment: prd
+repoURL: gitops.git
+path: charts/app3
+project: project2

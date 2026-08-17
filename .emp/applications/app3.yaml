@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app3
+  namespace: argocd
+spec:
+  project: project2
+  source:
+    repoURL: gitops.git
+    path: charts/app3
+    targetRevision: prd
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
