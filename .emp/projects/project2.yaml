@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   sourceRepos:
-  - gitops.git
+  - https://github.com/celeguim/gitops.git
   destinations:
   - server: https://kubernetes.default.svc
     namespace: prod

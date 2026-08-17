@@ -1,5 +1,5 @@
 name: app1
 environment: dev
-repoURL: http://gitops
+repoURL: https://github.com/celeguim/gitops.git
 path: charts/app1
 project: project1

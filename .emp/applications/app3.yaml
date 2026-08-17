@@ -6,7 +6,7 @@ metadata:
 spec:
   project: project2
   source:
-    repoURL: gitops.git
+    repoURL: https://github.com/celeguim/gitops.git
     path: charts/app3
     targetRevision: prd
   destination:

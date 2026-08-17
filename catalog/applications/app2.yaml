@@ -1,5 +1,5 @@
 name: app2
 environment: uat
-repoURL: gitops
+repoURL: https://github.com/celeguim/gitops.git
 path: charts/app2
 project: project1
